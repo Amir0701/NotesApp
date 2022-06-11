@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.fragment_notes.*
 class NotesFragment : Fragment() {
     private lateinit var noteViewModel: NoteViewModel
     private lateinit var noteAdapter: NoteAdapter
+    private  var notes: List<Notes> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +47,7 @@ class NotesFragment : Fragment() {
         noteViewModel = (activity as ViewModelable).getViewModel()
         noteViewModel.getAllNotes().observe(viewLifecycleOwner, Observer {
             noteAdapter.differ.submitList(it)
+            notes = it
         })
 
         noteAdapter.setOnItemClickListener(object : NoteAdapter.OnItemClickListener{
@@ -72,22 +74,15 @@ class NotesFragment : Fragment() {
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
-                if (p0 != null) {
-                    if(p0.isNotEmpty()) {
-                        var query = "SELECT * FROM notes WHERE title LIKE ? ;"
-                        var list = ArrayList<String>()
-                        list.add(p0)
-                        var simpleQuery = SimpleSQLiteQuery(query, list.toArray())
-                        noteAdapter.differ.submitList(noteViewModel.searchNote(simpleQuery))
+                var searchList = ArrayList<Notes>()
+                for(note in notes){
+                    if(note.title!!.contains(p0.toString(), true) || note.noteText!!.contains(p0.toString(), true)){
+                            searchList.add(note)
                     }
-//                    else{
-//                        noteAdapter.differ.submitList(noteViewModel.getAllNotes().value)
-//                    }
-                    return true
                 }
-                else{
-                    return false
-                }
+
+                noteAdapter.differ.submitList(searchList)
+                return true
             }
 
         })

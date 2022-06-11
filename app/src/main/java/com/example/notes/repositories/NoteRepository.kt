@@ -25,7 +25,4 @@ class NoteRepository(notesDatabase: NotesDatabase) {
 
     suspend fun getNoteById(id: Int) = notesDao.getNoteById(id)
 
-    suspend fun getNoteByString(searchString: SupportSQLiteQuery): List<Notes>{
-        return notesDao.getNotesByString(searchString)
-    }
 }

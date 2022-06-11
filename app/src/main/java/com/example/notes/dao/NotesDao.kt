@@ -19,6 +19,4 @@ interface NotesDao {
     @Query("SELECT * FROM notes WHERE id = :id")
     suspend fun getNoteById(id: Int): Notes
 
-    @RawQuery
-    suspend fun getNotesByString(query: SupportSQLiteQuery): List<Notes>
 }

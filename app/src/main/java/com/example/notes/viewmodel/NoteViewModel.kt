@@ -49,12 +49,4 @@ class NoteViewModel(application: Application): AndroidViewModel(application) {
         return mutableList
     }
 
-    fun searchNote(searchString: SupportSQLiteQuery): List<Notes> {
-        var notes: List<Notes> = ArrayList()
-        viewModelScope.launch {
-            delay(500L)
-            notes = noteRepository.getNoteByString(searchString)
-        }
-        return notes
-    }
 }
