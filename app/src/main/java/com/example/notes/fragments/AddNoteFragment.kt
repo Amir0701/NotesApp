@@ -1,13 +1,16 @@
 package com.example.notes.fragments
 
 import android.os.Bundle
+import android.transition.VisibilityPropagation
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.transition.Visibility
 import com.example.notes.R
 import com.example.notes.entities.Notes
 import com.example.notes.interfaces.ViewModelable
@@ -75,6 +78,7 @@ class AddNoteFragment : Fragment() {
             titleNoteEdit.setText(currentNote!!.title)
             noteEditText.setText(currentNote!!.noteText)
             isUpdate = true
+            delete.visibility = ImageView.VISIBLE
         }
     }
 

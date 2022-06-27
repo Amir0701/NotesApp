@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.AsyncListDiffer
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.DiffUtil.ItemCallback
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notes.R
@@ -57,6 +56,7 @@ class NoteAdapter(): RecyclerView.Adapter<NoteAdapter.NoteViewHolder>(){
         holder.itemView.setOnClickListener {
             onItemClickListener.onItemClick(currentNote, position)
         }
+
     }
 
     override fun getItemCount(): Int {
